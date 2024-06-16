@@ -17,23 +17,26 @@ function Login() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+
+    //Apesar da validação ter "dados incorretos", coloquei apenas para
+    //fins de simulação, minha intenção foi considerar o login um sucesso
+    //ao preenchimento de qualquer valor em usuário e senha, e erro apenas
+    //caso um deses não esteja preenchido. O sucesso leva p/ a 2ª page
+
     const validSubmit = useCallback(async (e) => {
         e.preventDefault();
         if (user === '' || password === '') {
             setError('Dados incorretos ou ausentes, tente novamente');
         } else {
             setError('');
-            // Simulando chamada API
+            // Simulação de chamada API
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            // Login com sucesso considerei o preenchimento de 
-            //qualquer valor em usuário e senha
-            //para o botão redirecionar para outra página
-            navigate('/outra-pagina');
+            navigate('/busca');
         }
     }, [user, password, navigate]);
 
     return (
-        <Container centerContent backgroundColor={'blue.100'}>
+        <Container centerContent>
             <Stack
                 direction='column'
                 alignItems='center'
@@ -60,17 +63,24 @@ function Login() {
                     <div>
                         <FormControl isInvalid={error !== ''}>
                             <form onSubmit={validSubmit}>
-                                <FormLabel htmlFor='user'>Usuário:</FormLabel>
+                                <FormLabel htmlFor='user' color='red.50'>
+                                    Usuário:</FormLabel>
                                 <Input
                                     placeholder='Nome de usuário'
+                                    _placeholder={{ color: 'red.50' }}
                                     type='text'
                                     id='user'
                                     value={user}
+                                    borderColor="gray.600"
                                     onChange={(e) => setUser(e.target.value)}
                                 />
-                                <FormLabel htmlFor='password'>Senha:</FormLabel>
+                                <FormLabel
+                                    htmlFor='password' color='red.50' marginTop={2}>
+                                    Senha:</FormLabel>
                                 <Input
                                     placeholder='Senha do usuário'
+                                    _placeholder={{ color: 'red.50' }}
+                                    borderColor="gray.600"
                                     type='password'
                                     id='password'
                                     value={password}
@@ -79,7 +89,7 @@ function Login() {
                                 {error && (
                                     <FormErrorMessage>{error}</FormErrorMessage>
                                 )}
-                                <Box as='button' marginTop={4} bg='blue.200' borderRadius='md' px={4} h={8} type='submit'>
+                                <Box as='button' marginTop={4} bg='red.50' borderRadius='md' px={4} h={8} type='submit'>
                                     Login
                                 </Box>
                             </form>

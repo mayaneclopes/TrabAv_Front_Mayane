@@ -1,14 +1,25 @@
 import './App.css';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from './pages/Login';
-import { ChakraProvider, background } from '@chakra-ui/react';
+import Busca from './pages/Busca';
+import List from './pages/List';
+import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/busca",
+    element: <Busca />,
+  },
+  {
+    path: "/busca/resultado",
+    element: <List />
   }
+
 ])
 
 
