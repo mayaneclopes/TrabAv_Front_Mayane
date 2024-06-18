@@ -9,7 +9,9 @@ import {
     Input,
     useToast,
     Image,
-    Center,
+    Box,
+    InputGroup,
+    InputRightElement,
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import { useState } from "react";
@@ -20,7 +22,6 @@ const PersonagemInfo = ({ personagem }) => {
 
     return (
         <Card
-            marginLeft="35%"
             bgColor="gray.50"
             marginTop={8}
             maxW="500px"
@@ -85,13 +86,22 @@ const Busca = () => {
                 justifyContent="center"
                 alignItems="center"
                 marginTop={8}>
-                <Input
-                    placeholder="Digite o personagem, feitiço, poção, filme ou livro"
-                    size="lg"
-                    variant='filled'
-                    value={input}
-                    onChange={onChangeInput}
-                />
+                <InputGroup>
+                    <Input
+                        placeholder="Digite o personagem, feitiço, poção, filme ou livro"
+                        size="lg"
+                        variant='filled'
+                        value={input}
+                        onChange={onChangeInput}
+                    />
+                    <InputRightElement opacity="20%" h="100%">
+                        <Button
+                            onClick={() => {
+                                setInput("");
+                                setPersonagem(undefined);
+                            }}>x</Button>
+                    </InputRightElement>
+                </InputGroup>
                 <Button
                     isLoading={loading}
                     size="lg"
@@ -102,11 +112,13 @@ const Busca = () => {
     };
 
     return (
-        <div>
+        <Box>
             <Header title="Busca no Universo Harry Potter" />
             {renderSearchInput()}
-            <PersonagemInfo personagem={personagem} />
-        </div>
+            <Flex justifyContent="center">
+                <PersonagemInfo personagem={personagem} />
+            </Flex>
+        </Box>
     )
 }
 
