@@ -2,7 +2,7 @@ import './App.css';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from './pages/Login';
 import Busca from './pages/Busca';
-import List from './pages/List';
+import Personagens from './pages/Personagens';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme';
 
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/busca/resultado",
-    element: <List />
+    element: <Personagens />
   }
 
 ])

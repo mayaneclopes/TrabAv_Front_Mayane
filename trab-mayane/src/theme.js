@@ -1,5 +1,5 @@
 
-import { background, extendTheme } from "@chakra-ui/react"
+import { extendTheme } from "@chakra-ui/react"
 
 //Aqui quis deixar on a possibilidade de darkmode do 
 //dispositivo do usuário, mas começar com claro.

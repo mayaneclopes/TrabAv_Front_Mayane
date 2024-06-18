@@ -1,22 +1,22 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
-const List = () => {
+const Personagens = () => {
+    const { id } = useParams();
     const [harryPotter, setHarryPotter] = useState([])
 
     const getHarryPotter = useCallback(async () => {
         try {
-            const response = await axios.get('https://api.potterdb.com/v1/characters');
+            const response = await axios.get(`https://api.potterdb.com/v1/characters/${id}`);
             setHarryPotter(response.data.data);
             console.log(response.data.data);
         } catch (error) {
             console.log(error)
         }
-    }, [])
-
-    useEffect(() => {
         getHarryPotter();
-    }, [getHarryPotter]);
+    }, [id]);
+
 
     if (!harryPotter.length) {
         return (
@@ -28,12 +28,11 @@ const List = () => {
 
     return (
         <div>
-            {harryPotter.map((character, index) => {
-                return <div key={index}>{character.attributes.slug}</div>
-            })}
+            <h1>{harryPotter.attributes.name}</h1>
+            <p>{harryPotter.attributes.description}</p>
         </div>
     )
 
 }
 
-export default List;
+export default Personagens;
