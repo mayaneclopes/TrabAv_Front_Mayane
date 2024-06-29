@@ -11,27 +11,25 @@ import {
     Text,
 } from '@chakra-ui/react';
 
+//Decidi traduzir pro inglês porque a API está em inglês e ficou esquisito.
+//Fiz meu melhor
+
 function Login() {
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-
-    //Apesar da validação ter "dados incorretos", coloquei apenas para
-    //fins de simulação, minha intenção foi considerar o login um sucesso
-    //ao preenchimento de qualquer valor em usuário e senha, e erro apenas
-    //caso um deses não esteja preenchido. O sucesso leva p/ a 2ª page
-
     const validSubmit = useCallback(async (e) => {
         e.preventDefault();
         if (user === '' || password === '') {
-            setError('Dados incorretos ou ausentes, tente novamente');
+            setError('Incorrect or absent data, try again');
+        } else if (password.length < 8) {
+            setError('Password must have at least 8 characters')
         } else {
             setError('');
-            // Simulação de chamada API
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            navigate('/busca');
+            navigate('/search');
         }
     }, [user, password, navigate]);
 
@@ -47,9 +45,9 @@ function Login() {
                     marginTop={4}>
                     <Text
                         as='b'
-                        fontSize='40px'>Bem vindo!</Text>
+                        fontSize='40px'>Welcome!</Text>
                     <Text
-                        fontSize='30px'>Faça seu login</Text>
+                        fontSize='30px'>Please, log in</Text>
                 </Box>
                 <Box
                     display='flex'
@@ -64,9 +62,9 @@ function Login() {
                         <FormControl isInvalid={error !== ''}>
                             <form onSubmit={validSubmit}>
                                 <FormLabel htmlFor='user' color='red.50'>
-                                    Usuário:</FormLabel>
+                                    User:</FormLabel>
                                 <Input
-                                    placeholder='Nome de usuário'
+                                    placeholder='Username'
                                     _placeholder={{ color: 'red.50' }}
                                     type='text'
                                     id='user'
@@ -76,9 +74,9 @@ function Login() {
                                 />
                                 <FormLabel
                                     htmlFor='password' color='red.50' marginTop={2}>
-                                    Senha:</FormLabel>
+                                    Password:</FormLabel>
                                 <Input
-                                    placeholder='Senha do usuário'
+                                    placeholder='Password'
                                     _placeholder={{ color: 'red.50' }}
                                     borderColor="gray.600"
                                     type='password'
